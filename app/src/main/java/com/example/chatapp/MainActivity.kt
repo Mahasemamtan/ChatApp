@@ -35,13 +35,9 @@ class MainActivity : AppCompatActivity() {
         val password = password_edittext_register.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please, enter valid email and/or password :)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please, enter valid email and/or password", Toast.LENGTH_SHORT).show()
             return
         }
-
-        Log.d(TAG, "Username: $username")
-        Log.d(TAG, "Email : $email")
-        Log.d(TAG, "Password: $password")
 
         // Firebase authentication to create user with Email and Password
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
@@ -50,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
                 // else if successful
                 Toast.makeText(this, "User ${email} created!", Toast.LENGTH_SHORT).show()
-                Log.d(TAG, "Successfully created user with UID: ${it.result?.user?.uid}")
             }
             .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
