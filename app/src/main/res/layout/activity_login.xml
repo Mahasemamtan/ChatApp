@@ -8,7 +8,7 @@
         tools:context=".LoginActivity" android:background="#2196F3">
     <EditText
             android:id="@+id/email_edittext_login"
-            android:hint="Email "
+            android:hint="@string/email_edittext_login"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:inputType="textEmailAddress"
@@ -26,7 +26,7 @@
     />
     <EditText
             android:id="@+id/password_edittext_login"
-            android:hint="Password"
+            android:hint="@string/password_edittext_login"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:inputType="textPassword"
@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="@id/email_edittext_login"/>
     <Button
             android:id="@+id/login_button_login"
-            android:text="Login"
+            android:text="@string/login_button_login"
             android:background="@drawable/rounded_button"
             android:textColor="@android:color/white"
             android:textSize="24sp"

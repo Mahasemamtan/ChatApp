@@ -11,11 +11,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val TAG = "RegistrationScreen"
+    private val TAG = "RegistrationScreen"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        title = getString(R.string.register_title)
 
         register_button_register.setOnClickListener {
             performRegistration()
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun performRegistration() {
+
         val username = username_textview_register.text.toString()
         val email = email_edittext_register.text.toString()
         val password = password_edittext_register.text.toString()
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                 // else if successful
                 Toast.makeText(this, "User ${email} created!", Toast.LENGTH_SHORT).show()
+
             }
             .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
@@ -57,6 +60,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun uploadImage() {
-        //TODO: well, implement it, dooohhhh!!
+        //TODO: Well, implement it, dooohhhh!!
+        Toast.makeText(this, "Do it!!", Toast.LENGTH_SHORT).show()
+
     }
 }

@@ -12,6 +12,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        title = getString(R.string.login_title)
 
         login_button_login.setOnClickListener {
             performLogin()

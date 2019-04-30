@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ChatApp</string>
+    <string name="register_title">Registration</string>
+    <string name="login_title">Login</string>
+    <string name="username_edittext_register">Username</string>
+    <string name="email_edittext_register">Email</string>
+    <string name="password_edittext_register">Password</string>
+    <string name="register_button_register">Register</string>
+    <string name="logIn_textview_register">Have an account? Log in.</string>
+    <string name="uploadImage_button_register">Upload\nimage</string>
+    <string name="email_edittext_login">Email</string>
+    <string name="password_edittext_login">Password</string>
+    <string name="login_button_login">Login</string>
 </resources>
