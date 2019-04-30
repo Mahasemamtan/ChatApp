@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() {
             performRegistration()
         }
 
+        upload_image_button_register.setOnClickListener {
+            uploadImage()
+        }
+
         login_textview_register.setOnClickListener {
             Log.i(TAG, "Open Login activity.")
 
@@ -50,5 +54,9 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    fun uploadImage() {
+        //TODO: well, implement it, dooohhhh!!
     }
 }
