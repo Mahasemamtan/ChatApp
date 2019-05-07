@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#2196F3">
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".MainActivity">
@@ -102,5 +102,5 @@
                 app:layout_constraintStart_toStartOf="@+id/upload_image_button_register"
                 app:layout_constraintTop_toTopOf="@+id/upload_image_button_register"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
