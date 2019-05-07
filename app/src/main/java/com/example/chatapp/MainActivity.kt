@@ -92,13 +92,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref =  FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
         val user = User(uid, username_textview_register.text.toString(), profileImageUrl)
 
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "User saved to Firebase database.")
+
+                val intent = Intent(this, LatestMessagesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Log.e(TAG, it.message)
