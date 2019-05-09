@@ -9,8 +9,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-        title = "Chat Logs"
 
-
+        supportActionBar?.title = intent.getStringExtra("USER_NAME")
     }
 }

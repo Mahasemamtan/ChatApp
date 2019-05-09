@@ -46,8 +46,8 @@ class NewMessageActivity : AppCompatActivity() {
                 }
 
                 adapter.setOnItemClickListener { item, view ->
-
                     val intent = Intent(view.context , ChatLogActivity::class.java)
+                        intent.putExtra("USER_NAME", (item as UserItem).user.username)
                     startActivity(intent)
 
                     finish()

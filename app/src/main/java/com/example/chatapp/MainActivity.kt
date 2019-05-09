@@ -89,6 +89,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun saveUserToFirebaseDatabase(profileImageUrl: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
+        val username = FirebaseAuth.getInstance().currentUser ?: ""
+
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
         val user = User(uid, username_textview_register.text.toString(), profileImageUrl)
