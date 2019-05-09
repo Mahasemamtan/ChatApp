@@ -1,11 +1,12 @@
-package com.example.chatapp
+package com.example.chatapp.messages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.gms.flags.Flag
+import com.example.chatapp.MainActivity
+import com.example.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
 
 class LatestMessagesActivity : AppCompatActivity() {
@@ -14,9 +15,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
 
-
         verifyUserIsLoggedIn()
-
     }
 
     private fun verifyUserIsLoggedIn() {

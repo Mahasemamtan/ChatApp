@@ -14,7 +14,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".LatestMessagesActivity">
+        <activity android:name=".messages.LatestMessagesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -29,10 +29,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".NewMessageActivity">
+        <activity android:name=".messages.NewMessageActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".LatestMessagesActivity"/>
+                       android:value=".messages.LatestMessagesActivity"/>
         </activity>
     </application>
-
 </manifest>

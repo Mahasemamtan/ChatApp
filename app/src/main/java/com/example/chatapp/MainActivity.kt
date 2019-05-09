@@ -2,7 +2,6 @@ package com.example.chatapp
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +9,8 @@ import android.provider.MediaStore
 import android.util.Log
 
 import android.widget.Toast
+import com.example.chatapp.messages.LatestMessagesActivity
+import com.example.chatapp.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -29,11 +30,9 @@ class MainActivity : AppCompatActivity() {
         register_button_register.setOnClickListener {
             performRegistration()
         }
-
         upload_image_button_register.setOnClickListener {
             getPhotoAndUpload()
         }
-
         login_textview_register.setOnClickListener {
             Log.i(TAG, "Open Login activity.")
 
@@ -59,12 +58,10 @@ class MainActivity : AppCompatActivity() {
 
                 // else if successful
                 Toast.makeText(this, "User ${email} created!", Toast.LENGTH_SHORT).show()
-
             }
             .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
             }
-
         uploadImageToFirebase()
     }
 
@@ -128,12 +125,6 @@ class MainActivity : AppCompatActivity() {
 
             upload_image_circle_image_view_register.setImageBitmap(bitmap)
             upload_image_button_register.alpha = 0f
-//            val bitmapDrwable = BitmapDrawable(bitmap)
-//            upload_image_button_register.setBackgroundDrawable(bitmapDrwable)
         }
     }
-}
-
-class User(val uid: String, val username: String, val profileImageUrl: String) {
-    constructor() : this ("", "", "")
 }

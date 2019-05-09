@@ -1,9 +1,10 @@
-package com.example.chatapp
+package com.example.chatapp.messages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import com.example.chatapp.R
+import com.example.chatapp.model.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

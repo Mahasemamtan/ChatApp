@@ -1,8 +1,10 @@
 package com.example.chatapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.chatapp.messages.LatestMessagesActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,6 +36,9 @@ class LoginActivity : AppCompatActivity() {
 
                 //Else
                 Toast.makeText(this, "$email is logged in.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LatestMessagesActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
