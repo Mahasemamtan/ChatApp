@@ -16,6 +16,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
 
         verifyUserIsLoggedIn()
+
     }
 
     private fun verifyUserIsLoggedIn() {
