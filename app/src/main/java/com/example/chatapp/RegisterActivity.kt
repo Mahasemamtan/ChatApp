@@ -17,7 +17,7 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private val TAG = "RegistrationScreen"
     private var  selectedPhotoURI: Uri? = null
