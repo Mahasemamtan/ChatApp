@@ -13,7 +13,6 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
-import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
@@ -51,7 +50,7 @@ class NewMessageActivity : AppCompatActivity() {
 
                 adapter.setOnItemClickListener { item, view ->
                     val intent = Intent(view.context , ChatLogActivity::class.java)
-                        intent.putExtra(USER_NAME, (item as UserItem).user.username)
+                    intent.putExtra(USER_NAME, (item as UserItem).user)
                     startActivity(intent)
 
                     finish()
