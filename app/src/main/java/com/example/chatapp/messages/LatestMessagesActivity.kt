@@ -3,19 +3,45 @@ package com.example.chatapp.messages
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.chatapp.RegisterActivity
 import com.example.chatapp.R
+import com.example.chatapp.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class LatestMessagesActivity : AppCompatActivity() {
+
+    companion object {
+        val TAG = "LatestMessageActivity"
+        var currentUser: User? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
 
+        fetchCurrentUser()
         verifyUserIsLoggedIn()
+    }
+
+    private fun fetchCurrentUser() {
+        val reference = FirebaseDatabase.getInstance().getReference("/users/${FirebaseAuth.getInstance().uid}")
+        reference.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                currentUser = p0.getValue(User::class.java)
+                Log.d(TAG, "Current user is ${currentUser?.username}")
+            }
+        })
     }
 
     private fun verifyUserIsLoggedIn() {
