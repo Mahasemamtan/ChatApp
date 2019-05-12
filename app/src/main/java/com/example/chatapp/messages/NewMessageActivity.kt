@@ -19,8 +19,6 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class NewMessageActivity : AppCompatActivity() {
 
-    private val TAG = "SelectUserActivity"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_message)
@@ -31,6 +29,7 @@ class NewMessageActivity : AppCompatActivity() {
 
     companion object {
         val USER_NAME = "USER_NAME"
+        val TAG = "SelectUserActivity"
     }
 
     private fun fetchUsers() {
