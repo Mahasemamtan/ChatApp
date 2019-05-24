@@ -25,7 +25,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
-
+        title = " "
         fetchCurrentUser()
         verifyUserIsLoggedIn()
     }
@@ -39,6 +39,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 currentUser = p0.getValue(User::class.java)
+                title = currentUser?.username
                 Log.d(TAG, "Current user is ${currentUser?.username}")
             }
         })
@@ -73,5 +74,11 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+}
+
+class CustomProgressBar {
+    fun showLoader() {
+
     }
 }

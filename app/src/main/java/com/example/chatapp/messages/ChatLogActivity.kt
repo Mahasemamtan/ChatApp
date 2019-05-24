@@ -2,7 +2,6 @@ package com.example.chatapp.messages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.FontsContract
 import android.util.Log
 import com.example.chatapp.R
 import com.example.chatapp.model.ChatMessage
@@ -30,7 +29,7 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        this.user = intent.getParcelableExtra<User>(NewMessageActivity.USER_NAME)
+        this.user = intent.getParcelableExtra(NewMessageActivity.USER_NAME)
         title = this.user?.username
 
         recycler_view_chat_log.adapter = adapter
@@ -97,7 +96,6 @@ class ChatLogActivity : AppCompatActivity() {
                 edittext_chat_log.text.clear()
                 recycler_view_chat_log.scrollToPosition(adapter.itemCount - 1)
             }
-
         toReference.setValue(chatMessage)
     }
 }
