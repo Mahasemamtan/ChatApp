@@ -129,12 +129,6 @@ class LatestMessagesActivity : AppCompatActivity() {
     }
 }
 
-class CustomProgressBar {
-    fun showLoader() {
-        TODO("Make it! Does not have necessarily to be custom..")
-    }
-}
-
 class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.latest_message_row
@@ -142,6 +136,23 @@ class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.latest_message_texview_latest_message.text = chatMessage.text
-    }
 
+        val chatPartnerId: String
+        if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+            chatPartnerId = chatMessage.toId
+        } else {
+            chatPartnerId = chatMessage.fromId
+        }
+
+        val reference = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
+        reference.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                val user = p0.getValue(User::class.java) ?: return
+                viewHolder.itemView.username_textview_latest_message.text = user.username
+            }
+        })
+    }
 }
