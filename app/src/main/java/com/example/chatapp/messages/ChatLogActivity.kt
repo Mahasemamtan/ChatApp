@@ -37,7 +37,7 @@ class ChatLogActivity : AppCompatActivity() {
         listenForMessages()
 
         send_button_change_log.setOnClickListener {
-            Log.d(TAG, edittext_chat_log.text.toString())
+//            Log.d(TAG, edittext_chat_log.text.toString())
             performSendMessage()
         }
     }
@@ -97,6 +97,13 @@ class ChatLogActivity : AppCompatActivity() {
                 recycler_view_chat_log.scrollToPosition(adapter.itemCount - 1)
             }
         toReference.setValue(chatMessage)
+
+        //Creating nod for current user
+        val latestMessageReference = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
+        latestMessageReference.setValue(chatMessage)
+        //Creating nod for target user
+        val latestMessageToReference = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
+        latestMessageToReference.setValue(chatMessage)
     }
 }
 
