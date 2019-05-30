@@ -34,8 +34,6 @@ class RegisterActivity : AppCompatActivity() {
             getPhotoAndUpload()
         }
         login_textview_register.setOnClickListener {
-            Log.i(TAG, "Open Login activity.")
-
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -74,11 +72,7 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.putFile(selectedPhotoURI!!)
             .addOnSuccessListener {
-                Log.d(TAG, "Photo uploaded: ${it.metadata?.path}")
-
                 ref.downloadUrl.addOnSuccessListener {
-                    Log.d(TAG, "Uploaded image location: $it")
-
                     saveUserToFirebaseDatabase(it.toString())
                 }
             }
@@ -97,8 +91,6 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Log.d(TAG, "User saved to Firebase database.")
-
                 val intent = Intent(this, LatestMessagesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -120,8 +112,6 @@ class RegisterActivity : AppCompatActivity() {
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
             // Return image and insert it into imageView
-            Log.d(TAG, "Photo was selected.")
-
             selectedPhotoURI = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoURI)
 

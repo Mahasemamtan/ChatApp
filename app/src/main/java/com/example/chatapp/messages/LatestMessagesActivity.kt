@@ -6,23 +6,23 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.chatapp.RegisterActivity
 import com.example.chatapp.R
 import com.example.chatapp.model.ChatMessage
 import com.example.chatapp.model.User
+import com.example.chatapp.views.LatestMessageRow
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messages.*
-import kotlinx.android.synthetic.main.latest_message_row.view.*
-import java.nio.file.FileVisitResult
 
 class LatestMessagesActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "LatestMessageActivity"
+        val USER_KEY = "USER_KEY"
         var currentUser: User? = null
     }
 
@@ -35,12 +35,21 @@ class LatestMessagesActivity : AppCompatActivity() {
         title = " "
 
         recycler_view_latest_messages.adapter = adapter
+        recycler_view_latest_messages.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         fetchCurrentUser()
         verifyUserIsLoggedInAndStartActivity()
 
         listenForLatestMessages()
         displayLastMessage()
+
+        adapter.setOnItemClickListener { item, view ->
+            val intent = Intent(this , ChatLogActivity::class.java)
+
+            val row = item as LatestMessageRow
+            intent.putExtra(NewMessageActivity.USER_NAME, row.chatPartnerUser)
+            startActivity(intent)
+        }
     }
 
     private fun listenForLatestMessages() {
@@ -92,7 +101,6 @@ class LatestMessagesActivity : AppCompatActivity() {
                 currentUser = p0.getValue(User::class.java)
                 //TODO: Remove this title once development is done, no need for user to see his name
                 title = currentUser?.username
-                Log.d(TAG, "Current user is ${currentUser?.username}")
             }
         })
     }
@@ -129,30 +137,3 @@ class LatestMessagesActivity : AppCompatActivity() {
     }
 }
 
-class LatestMessageRow(val chatMessage: ChatMessage): Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.latest_message_row
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.latest_message_texview_latest_message.text = chatMessage.text
-
-        val chatPartnerId: String
-        if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-            chatPartnerId = chatMessage.toId
-        } else {
-            chatPartnerId = chatMessage.fromId
-        }
-
-        val reference = FirebaseDatabase.getInstance().getReference("/users/$chatPartnerId")
-        reference.addListenerForSingleValueEvent(object: ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-            override fun onDataChange(p0: DataSnapshot) {
-                val user = p0.getValue(User::class.java) ?: return
-                viewHolder.itemView.username_textview_latest_message.text = user.username
-            }
-        })
-    }
-}

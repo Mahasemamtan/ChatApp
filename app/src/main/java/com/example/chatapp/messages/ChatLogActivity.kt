@@ -6,6 +6,8 @@ import android.util.Log
 import com.example.chatapp.R
 import com.example.chatapp.model.ChatMessage
 import com.example.chatapp.model.User
+import com.example.chatapp.views.ChatFromItem
+import com.example.chatapp.views.ChatToItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -37,7 +39,6 @@ class ChatLogActivity : AppCompatActivity() {
         listenForMessages()
 
         send_button_change_log.setOnClickListener {
-//            Log.d(TAG, edittext_chat_log.text.toString())
             performSendMessage()
         }
     }
@@ -58,6 +59,8 @@ class ChatLogActivity : AppCompatActivity() {
                 } else {
                     adapter.add(ChatToItem(chatMessage.text, user!!))
                 }
+
+                recycler_view_chat_log.scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -85,7 +88,6 @@ class ChatLogActivity : AppCompatActivity() {
         val fromId = FirebaseAuth.getInstance().uid ?: return
         val toId = user?.uid ?: return
 
-//        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
         val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
         val toReference = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
 
@@ -104,29 +106,5 @@ class ChatLogActivity : AppCompatActivity() {
         //Creating nod for target user
         val latestMessageToReference = FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
         latestMessageToReference.setValue(chatMessage)
-    }
-}
-
-class ChatFromItem (val text: String, val user: User) : Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.chat_from_row
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textview_from_chat_log.text = text
-
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.imageview_from_chat_log)
-    }
-}
-
-class ChatToItem (val text: String, val user: User) : Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.chat_to_row
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.textview_to_chat_log.text = text
-
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.imageview_to_chat_log)
     }
 }
