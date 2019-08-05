@@ -55,12 +55,13 @@ class RegisterActivity : AppCompatActivity() {
                 if (!it.isSuccessful) return@addOnCompleteListener
 
                 // else if successful
-                Toast.makeText(this, "User ${email} created!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "User $email created!", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "User is successfully created with UID: ${it.result?.user?.uid}")
+                uploadImageToFirebase()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
             }
-        uploadImageToFirebase()
     }
 
     private fun uploadImageToFirebase() {
